@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs and runtime data
+/tmp/btc_dash/
+*.log
+
+# Editor and OS files
+*.swp
+*.swo
+*.DS_Store
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python dependency files
+pip-log.txt
+
+# IDEs
+.vscode/
+.idea/
