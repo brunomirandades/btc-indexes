@@ -9,6 +9,9 @@ This Python script fetches real-time Bitcoin (BTC) market data from public APIs 
 - 🔸 **Fear & Greed Index**
 - 🔸 **Transfer Fee Rates (sat/vB)**
 
+### Terminal Screenshot
+![BTC Dashboard Preview](terminal-screenshot.png)
+
 ## 📦 Requirements
 
 - Python 3.7+
@@ -43,7 +46,7 @@ python btc-indexes.py
 - ✅ **TRANSFER SIGNAL**: Triggered when:
     - halfHourFee ≤ 15 sat/vB
 
-## Logging
+## 🧹 Logging
 
 Log files are automatically saved in:
 ```bash
