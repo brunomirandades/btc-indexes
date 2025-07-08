@@ -12,6 +12,9 @@ import sys
 import logging
 import os
 
+# Const to enable logging
+ENABLE_LOGGER = False
+
 # Base timeout for requests
 TIMEOUT = 3
 
@@ -50,11 +53,11 @@ def get_btc_price():
             raise ValueError("Price is missing or not a number.")
         
     except requests.exceptions.RequestException:
-        logging.exception("Request error while fetching BTC price")
+        log_exception("Request error while fetching BTC price")
     except ValueError:
-        logging.exception("Invalid value received for BTC price")
+        log_exception("Invalid value received for BTC price")
     except Exception:
-        logging.exception("Unexpected error occurred while fetching BTC price")
+        log_exception("Unexpected error occurred while fetching BTC price")
     finally:
         return price
 
@@ -83,11 +86,11 @@ def get_btc_ath():
             raise ValueError("ATH value is missing or not a number.")
 
     except requests.exceptions.RequestException:
-        logging.exception("Request error while fetching BTC ATH")
+        log_exception("Request error while fetching BTC ATH")
     except ValueError:
-        logging.exception("Invalid data format received for BTC ATH")
+        log_exception("Invalid data format received for BTC ATH")
     except Exception:
-        logging.exception("Unexpected error occurred while fetching BTC ATH")
+        log_exception("Unexpected error occurred while fetching BTC ATH")
     finally:
         return ath_usd
 
@@ -125,11 +128,11 @@ def get_200_day_ma():
         ma200 = math.floor(ma200)
 
     except requests.exceptions.RequestException:
-        logging.exception("Request error while fetching BTC price range for MA200")
+        log_exception("Request error while fetching BTC price range for MA200")
     except ValueError:
-        logging.exception("Invalid value or structure in BTC price data")
+        log_exception("Invalid value or structure in BTC price data")
     except Exception:
-        logging.exception("Unexpected error occurred during MA200 calculation")
+        log_exception("Unexpected error occurred during MA200 calculation")
     finally:
         return ma200
 
@@ -163,11 +166,11 @@ def get_fear_and_greed():
         value = int(value_raw)  # Coerce to int for safety
 
     except requests.exceptions.RequestException:
-        logging.exception("Request error while fetching Fear and Greed index")
+        log_exception("Request error while fetching Fear and Greed index")
     except ValueError:
-        logging.exception("Invalid or missing values in Fear and Greed response")
+        log_exception("Invalid or missing values in Fear and Greed response")
     except Exception:
-        logging.exception("Unexpected error occurred while fetching Fear and Greed index")
+        log_exception("Unexpected error occurred while fetching Fear and Greed index")
     finally:
         return value, label
 
@@ -196,11 +199,11 @@ def get_transfer_fees():
                 logging.warning(f"⚠️ Missing or invalid value for '{key}' in fee data.")
 
     except requests.exceptions.RequestException:
-        logging.exception("Request error while fetching transfer fees")
+        log_exception("Request error while fetching transfer fees")
     except ValueError:
-        logging.exception("Invalid response structure for transfer fees")
+        log_exception("Invalid response structure for transfer fees")
     except Exception:
-        logging.exception("Unexpected error occurred while fetching transfer fees")
+        log_exception("Unexpected error occurred while fetching transfer fees")
     finally:
         return new_fees
 
@@ -289,10 +292,16 @@ def setup_logger():
     
     logging.info("Logging set!")
 
+def log_exception(message):
+    """Log exception if the logger const is set to enable equal true"""
+    if ENABLE_LOGGER:
+        logging.exception(message)
+
 
 if __name__ == '__main__':
     # Create/clear logging file
-    setup_logger()
+    if ENABLE_LOGGER:
+        setup_logger()
 
     # Header print
     clear_all(hide_cursor=True)
